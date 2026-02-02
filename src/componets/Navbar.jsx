@@ -12,13 +12,14 @@ const Navbar = () => {
 
   const { user, signOutUser } = useAuth() || {};
 
+  // sign out user
   const handleSignOutUser = () => {
     signOutUser()
       .then(() => {
         toast.success("sign out successful");
       })
-      .catch((error) => {
-        console.log(error.message);
+      .catch(() => {
+        toast.error("sign out failed");
       });
   };
 
@@ -65,10 +66,32 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <Link to="/myCart">My Cart</Link>
+              <NavLink
+                to="/myCart"
+                className={({ isActive, isPending }) =>
+                  isPending
+                    ? "pending"
+                    : isActive
+                      ? "text-[#FF497C] border-b-4 border-[#FF497C]"
+                      : "hover:text-[#FF497C]"
+                }
+              >
+                My Cart
+              </NavLink>
             </li>
             <li>
-              <Link to="/register">Register</Link>
+              <NavLink
+                to="/register"
+                className={({ isActive, isPending }) =>
+                  isPending
+                    ? "pending"
+                    : isActive
+                      ? "text-[#FF497C] border-b-4 border-[#FF497C]"
+                      : "hover:text-[#FF497C]"
+                }
+              >
+                Register
+              </NavLink>
             </li>
           </ul>
         </nav>
@@ -168,6 +191,19 @@ const Navbar = () => {
                 }
               >
                 <span>My Cart</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                onClick={() => setSideOpen(false)}
+                to="/register"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#FF497C] border-b-4 border-[#FF497C]"
+                    : "hover:text-[#FF497C]"
+                }
+              >
+                <span>Register</span>
               </NavLink>
             </li>
           </ul>

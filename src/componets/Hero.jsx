@@ -9,7 +9,7 @@ import "swiper/css/effect-fade";
 
 const Hero = () => {
   return (
-    <div className="gadgetContainer lg:h-150 bg-blue-400">
+    <div className="gadgetContainer lg:h-150 bg-sky-200">
       <Swiper
         effect={"fade"}
         fadeEffect={{ crossFade: true }}
