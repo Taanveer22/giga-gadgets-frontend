@@ -14,24 +14,22 @@ const Register = () => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then(() => {
+        toast.success("google login done successfully");
         navigate(location?.state ? location.state : "/");
-        toast.success("user register successfully");
         setLoading(false);
       })
       .catch(() => {
-        toast.error("user register failed");
+        toast.error("google login failed");
       });
   };
 
   // Handle register with email password
   const handleRegisterUser = (e) => {
     e.preventDefault();
-
     const email = e.target.email.value;
     const password = e.target.password.value;
     const name = e.target.name.value;
     const imageURL = e.target.imageURL.value;
-    setLoading(true);
 
     registerUser(email, password)
       .then(() => {

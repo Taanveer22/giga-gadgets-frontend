@@ -2,23 +2,45 @@ import signIn from "../assets/signIn.jpg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Spinner from "../componets/Spinner";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignIn = () => {
-  const navigate = useNavigate();
-  const { user, loading } = useAuth() || {};
+  const { loading, setLoading, googleSignIn, signInUser } = useAuth() || {};
   const location = useLocation();
+  const navigate = useNavigate();
 
   // google sign in
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then(() => {
+        toast.success("google login successfully done");
+        navigate(location?.state ? location.state : "/");
+        setLoading(false);
+      })
+      .catch(() => {
+        toast.error("google login failed");
+      });
+  };
 
   // Handle Login
-  const handleLogin = (e) => {
+  const handleSignInForm = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form?.email.value;
     const password = form?.password.value;
 
     // Sign In
+    signInUser(email, password)
+      .then(() => {
+        toast.success("sign in successful");
+        navigate(location?.state ? location.state : "/");
+        setLoading(false);
+      })
+      .catch(() => {
+        toast.error("sign in failed");
+      });
   };
+
   return (
     <div className="gadgetContainer">
       {loading && <Spinner />}
@@ -72,7 +94,7 @@ const SignIn = () => {
 
               <div className="flex items-center flex-wrap md:flex-nowrap gap-4 mb-4">
                 <button
-                  onClick={() => handleGoogleSignIn()}
+                  onClick={handleGoogleSignIn}
                   className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
                 >
                   <div className="bg-white p-2 rounded-full">
@@ -98,10 +120,7 @@ const SignIn = () => {
                   <span className="ml-4">Sign In with Google</span>
                 </button>
 
-                <button
-                  onClick={() => handleGithubSignIn()}
-                  className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
-                >
+                <button className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
                   <div className="bg-white p-1 rounded-full">
                     <svg className="w-6" viewBox="0 0 32 32">
                       <path
@@ -120,7 +139,7 @@ const SignIn = () => {
                 </div>
               </div>
 
-              <form onSubmit={handleLogin} className="space-y-3 w-full ">
+              <form onSubmit={handleSignInForm} className="space-y-3 w-full ">
                 <div>
                   <fieldset className="border border-solid border-gray-300 p-3 w-full rounded">
                     <legend className=" font-medium text-black/60">
@@ -129,7 +148,6 @@ const SignIn = () => {
                     <input
                       type="email"
                       name="email"
-                      id=""
                       placeholder="Email"
                       className="px-4 py-1 w-full focus:outline-0"
                     />
@@ -143,7 +161,6 @@ const SignIn = () => {
                     <input
                       type="password"
                       name="password"
-                      id=""
                       placeholder="password"
                       className="px-4 py-1 w-full focus:outline-0"
                     />
@@ -158,11 +175,11 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-      {/* <Toaster
+      <Toaster
         toastOptions={{
           duration: 3000,
         }}
-      /> */}
+      />
     </div>
   );
 };
