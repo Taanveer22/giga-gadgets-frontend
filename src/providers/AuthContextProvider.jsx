@@ -52,17 +52,17 @@ const AuthContextProvider = ({ children }) => {
   };
 
   // update profile
-  const updateUserProfile = (obj) => {
+  const updateUserProfile = (name, imageURL) => {
     setLoading(true);
-    // return updateProfile(auth.currentUser, obj)
-    return updateProfile(auth.currentUser, obj);
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: imageURL,
+    });
   };
 
   // use observer to check user state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("check user state...");
-      console.log(user);
       setLoading(false);
       setUser(currentUser);
     });

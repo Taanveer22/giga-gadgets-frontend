@@ -7,27 +7,51 @@ import Spinner from "../componets/Spinner";
 const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, loading } = useAuth() || {};
+  const { loading, setLoading, registerUser, googleSignIn, updateUserProfile } =
+    useAuth() || {};
 
   // google sign in
-
-  // github sign in
-  // const handleGithubSignIn = () => {
-  //   githubSignIn()
-  //     .then((result) => {
-  //       setLoading(false);
-  //       navigate(location?.state ? location.state : "/");
-  //       toast.success("Login successful");
-  //     })
-  //     .catch((err) => {
-  //       setLoading(false);
-  //       toast.error(err.message);
-  //     });
-  // };
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then(() => {
+        navigate(location?.state ? location.state : "/");
+        toast.success("user register successfully");
+        setLoading(false);
+      })
+      .catch(() => {
+        toast.error("user register failed");
+      });
+  };
 
   // Handle register with email password
   const handleRegisterUser = (e) => {
     e.preventDefault();
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const name = e.target.name.value;
+    const imageURL = e.target.imageURL.value;
+    setLoading(true);
+
+    registerUser(email, password)
+      .then(() => {
+        toast.success("user register done");
+        // ✅ Update Profile Here
+        updateUserProfile(name, imageURL)
+          .then(() => {
+            toast.success("update profile successfully");
+            navigate(location?.state ? location.state : "/");
+            setLoading(false);
+          })
+          .catch(() => {
+            toast.error("update profile failed");
+            setLoading(false);
+          });
+      })
+      .catch(() => {
+        toast.error("user register failed");
+        setLoading(false);
+      });
   };
 
   return (
@@ -85,7 +109,10 @@ const Register = () => {
                 </div>
 
                 <div className="flex items-center flex-wrap md:flex-nowrap gap-4 mb-4">
-                  <button className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+                  <button
+                    onClick={handleGoogleSignIn}
+                    className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+                  >
                     <div className="bg-white p-2 rounded-full">
                       <svg className="w-4" viewBox="0 0 533.5 544.3">
                         <path
@@ -140,7 +167,6 @@ const Register = () => {
                       <input
                         type="text"
                         name="name"
-                        id=""
                         placeholder="name"
                         className="px-4 py-1 w-full focus:outline-0"
                       />
@@ -155,7 +181,6 @@ const Register = () => {
                       <input
                         type="email"
                         name="email"
-                        id=""
                         placeholder="Email"
                         className="px-4 py-1 w-full focus:outline-0"
                       />
@@ -169,7 +194,6 @@ const Register = () => {
                       <input
                         type="password"
                         name="password"
-                        id=""
                         placeholder="password"
                         className="px-4 py-1 w-full focus:outline-0"
                       />
@@ -184,7 +208,6 @@ const Register = () => {
                       <input
                         type="text"
                         name="imageURL"
-                        id=""
                         placeholder="imageURL"
                         className="px-4 py-1 w-full focus:outline-0"
                       />

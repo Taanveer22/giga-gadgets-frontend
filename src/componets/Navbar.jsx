@@ -2,17 +2,24 @@ import { useState } from "react";
 import logo from "../assets/logo.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const navigate = useNavigate();
+
   const [sideOpen, setSideOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
 
   const { user, signOutUser } = useAuth() || {};
 
   const handleSignOutUser = () => {
-    console.log("out");
-    signOutUser();
+    signOutUser()
+      .then(() => {
+        toast.success("sign out successful");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   return (
@@ -75,7 +82,6 @@ const Navbar = () => {
             >
               <img
                 src={user?.photoURL}
-                alt="User"
                 className="w-full h-full rounded-full"
               />
             </button>
@@ -117,16 +123,12 @@ const Navbar = () => {
       {/* Side Menu For Mobile */}
       <div
         className={`absolute ${
-          sideOpen ? "" : "hidden"
+          sideOpen ? "block" : "hidden"
         } md:hidden bg-white shadow-lg w-56 min-h-screen overflow-y-auto top-0 left-0 ease-in-out duration-300 z-50`}
       >
         <div className="p-4">
           <div className="shrink-0 flex items-center">
-            <img
-              className="w-50 h-16 object-cover"
-              src={logo}
-              alt="Logo"
-            />
+            <img className="w-50 h-16 object-cover" src={logo} alt="Logo" />
           </div>
           <ul className="mt-6 flex flex-col gap-4 ml-5">
             <li>
