@@ -18,6 +18,7 @@ const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
+// ==== Component AuthContextProvider start =====
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
@@ -27,6 +28,7 @@ const AuthContextProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
+  
   // github sign in
   const githubSignIn = () => {
     setLoading(true);
@@ -89,6 +91,8 @@ const AuthContextProvider = ({ children }) => {
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
 };
+
+// ==== Component AuthContextProvider end =====
 
 export { AuthContext };
 export default AuthContextProvider;
