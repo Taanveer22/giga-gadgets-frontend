@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
 
 const AddProduct = () => {
@@ -5,15 +6,29 @@ const AddProduct = () => {
 
   const handleAddProduct = (e) => {
     e.preventDefault();
-
     const name = e.target.name.value;
     const price = e.target.price.value;
     const image = e.target.image.value;
     const type = e.target.type.value;
-    const email = user.email;
-
+    const email = user?.email;
     const info = { name, price, image, type, email };
-    console.log(info);
+    // console.log(info);
+
+    // send data to server via post method
+    fetch("http://localhost:5000/addProduct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(info),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.insertedId) {
+          toast.success("data added successfully");
+        }
+      });
   };
 
   return (
