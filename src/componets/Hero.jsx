@@ -4,14 +4,12 @@ import heroImg3 from "../assets/Hero/appleLaptop.png";
 import { EffectFade, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "boxicons/css/boxicons.min.css";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-fade";
 
 const Hero = () => {
   return (
-    <div className="gadgetContainer lg:h-[600px] bg-blue-400">
+    <div className="gadgetContainer lg:h-150 bg-blue-400">
       <Swiper
         effect={"fade"}
         fadeEffect={{ crossFade: true }}
@@ -27,7 +25,7 @@ const Hero = () => {
       >
         {/* slide 1 */}
         <SwiperSlide>
-          <div className="md:h-[500px] h-auto">
+          <div className="md:h-125 h-auto">
             <div className="h-full flex flex-col md:flex-row justify-between md:gap-2 gap-10 items-center">
               <div className="flex-1 mt-10 md:mt-0 w-full md:w-auto">
                 <p className="font-semibold text-[#FF497C] mb-3 text-center md:text-left">
@@ -56,12 +54,8 @@ const Hero = () => {
               </div>
 
               {/* right */}
-              <div className="w-full md:max-h-[400px] h-[250px] flex-1 mb-10 md:mb-0">
-                <img
-                  className="h-full object-cover w-full"
-                  src={heroImg1}
-                  alt=""
-                />
+              <div className="w-full md:max-h-100 h-64 flex-1 mb-10 md:mb-0">
+                <img className="h-full object-cover w-full" src={heroImg1} />
               </div>
             </div>
           </div>
@@ -69,7 +63,7 @@ const Hero = () => {
 
         {/* slide 2 */}
         <SwiperSlide>
-          <div className="md:h-[500px] h-auto">
+          <div className="md:h-125 h-auto">
             <div className="h-full flex flex-col md:flex-row justify-between md:gap-2 gap-10 items-center">
               <div className="flex-1 mt-10 md:mt-0 w-full md:w-auto">
                 <p className="font-semibold text-[#FF497C] mb-3 text-center md:text-left">
@@ -98,11 +92,10 @@ const Hero = () => {
               </div>
 
               {/* right */}
-              <div className="w-full md:max-h-[400px] flex-1 mb-10 md:mb-0">
+              <div className="w-full md:max-h-100 flex-1 mb-10 md:mb-0">
                 <img
-                  className="md:h-full h-[250px] object-cover w-full"
+                  className="md:h-full h-64 object-cover w-full"
                   src={heroImg2}
-                  alt=""
                 />
               </div>
             </div>
@@ -111,7 +104,7 @@ const Hero = () => {
 
         {/* slide 3 */}
         <SwiperSlide>
-          <div className="md:h-[500px] h-auto">
+          <div className="md:h-125 h-auto">
             <div className="h-full flex flex-col md:flex-row justify-between md:gap-2 gap-10 items-center">
               <div className="flex-1 mt-10 md:mt-0 w-full md:w-auto">
                 <p className="font-semibold text-[#FF497C] mb-3 text-center md:text-left">
@@ -139,12 +132,8 @@ const Hero = () => {
               </div>
 
               {/* right */}
-              <div className="w-full max-h-[400px] flex-1 mb-10 md:mb-0">
-                <img
-                  className="h-full object-cover w-full"
-                  src={heroImg3}
-                  alt=""
-                />
+              <div className="w-full max-h-100 flex-1 mb-10 md:mb-0">
+                <img className="h-full object-cover w-full" src={heroImg3} />
               </div>
             </div>
           </div>

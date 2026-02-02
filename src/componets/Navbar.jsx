@@ -8,19 +8,24 @@ const Navbar = () => {
   const [sideOpen, setSideOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
 
-  const { user, handleLogOut } = useAuth() || {};
+  const { user, signOutUser } = useAuth() || {};
+
+  const handleSignOutUser = () => {
+    console.log("out");
+    signOutUser();
+  };
 
   return (
-    <div className="max-w-[1920px] mx-auto">
-      <header className="bg-gray-500 shadow-lg flex w-full px-5 md:px-[50px] lg:px-[80px] xl:px-[120px] 2xl:px-[150px]">
-        <Link to="/" className="md:border-r flex flex-shrink-0 items-center">
+    <div className="max-w-7xl mx-auto">
+      <header className="shadow-lg flex w-full px-5 md:px-12 lg:px-20 xl:px-30 2xl:px-40">
+        <Link to="/" className="md:border-r flex shrink-0 items-center">
           <img
-            className="md:w-[200px] w-[150px] h-[70px] object-cover"
+            className="md:w-50 w-36 h-16 object-cover"
             src={logo}
             alt="Logo"
           />
         </Link>
-        
+
         {/* middle */}
         <nav className="header-links md:contents font-medium text-base hidden">
           <ul className="flex gap-8 items-center ml-4 xl:ml-8 mr-auto w-full justify-center">
@@ -55,6 +60,9 @@ const Navbar = () => {
             <li>
               <Link to="/myCart">My Cart</Link>
             </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
           </ul>
         </nav>
 
@@ -63,7 +71,7 @@ const Navbar = () => {
           {user ? (
             <button
               onClick={() => setUserOpen(!userOpen)}
-              className="border-2 border-[#FF497C] rounded-full w-[40px]"
+              className="border-2 border-[#FF497C] rounded-full w-10"
             >
               <img
                 src={user?.photoURL}
@@ -76,7 +84,7 @@ const Navbar = () => {
               onClick={() => navigate("/signIn")}
               className="bg-[#FF497C] hover:bg-[#ab3154] duration-200 text-white font-bold px-4 xl:px-6 py-1 rounded"
             >
-              Login
+              Signin
             </button>
           )}
 
@@ -89,10 +97,10 @@ const Navbar = () => {
             <p className="text-lg font-semibold">{user?.displayName}</p>
 
             <button
-              onClick={() => handleLogOut()}
+              onClick={handleSignOutUser}
               className="bg-[#FF497C] hover:bg-[#ab3154] duration-200 text-white font-bold px-4 xl:px-6 py-1 rounded cursor-pointer"
             >
-              logout
+              Sign Out
             </button>
           </div>
         </div>
@@ -106,16 +114,16 @@ const Navbar = () => {
         </button>
       </header>
 
-      {/* Side Menu */}
+      {/* Side Menu For Mobile */}
       <div
         className={`absolute ${
           sideOpen ? "" : "hidden"
         } md:hidden bg-white shadow-lg w-56 min-h-screen overflow-y-auto top-0 left-0 ease-in-out duration-300 z-50`}
       >
         <div className="p-4">
-          <div className="flex-shrink-0 flex items-center">
+          <div className="shrink-0 flex items-center">
             <img
-              className="w-[200px] h-[70px] object-cover"
+              className="w-50 h-16 object-cover"
               src={logo}
               alt="Logo"
             />
@@ -126,7 +134,9 @@ const Navbar = () => {
                 onClick={() => setSideOpen(false)}
                 to="/"
                 className={({ isActive }) =>
-                  isActive ? "text-[#FF497C] border-b-4 border-[#FF497C]" : "hover:text-[#FF497C]"
+                  isActive
+                    ? "text-[#FF497C] border-b-4 border-[#FF497C]"
+                    : "hover:text-[#FF497C]"
                 }
               >
                 <span>Home</span>
@@ -137,7 +147,9 @@ const Navbar = () => {
                 onClick={() => setSideOpen(false)}
                 to="/addProduct"
                 className={({ isActive }) =>
-                  isActive ? "text-[#FF497C] border-b-4 border-[#FF497C]" : "hover:text-[#FF497C]"
+                  isActive
+                    ? "text-[#FF497C] border-b-4 border-[#FF497C]"
+                    : "hover:text-[#FF497C]"
                 }
               >
                 <span>Add Product</span>
@@ -148,43 +160,15 @@ const Navbar = () => {
                 onClick={() => setSideOpen(false)}
                 to="/myCart"
                 className={({ isActive }) =>
-                  isActive ? "text-[#FF497C] border-b-4 border-[#FF497C]" : "hover:text-[#FF497C]"
+                  isActive
+                    ? "text-[#FF497C] border-b-4 border-[#FF497C]"
+                    : "hover:text-[#FF497C]"
                 }
               >
                 <span>My Cart</span>
               </NavLink>
             </li>
           </ul>
-        </div>
-
-        <div className="ml-8 mt-8">
-          {user ? (
-            <div className="flex flex-col gap-2 top-16 pr-5">
-              <div className="border-2 mx-auto border-[#FF497C] rounded-full w-[40px] overflow-hidden">
-                <img
-                  src={user?.photoURL}
-                  alt="User"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="text-lg font-semibold text-center">
-                {user?.displayName}
-              </p>
-              <button 
-                onClick={() => handleLogOut()}
-                className="bg-[#FF497C] hover:bg-[#ab3154] duration-200 text-white font-bold px-4 py-1 rounded"
-              >
-                logout
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => navigate("/signIn")}
-              className="bg-[#FF497C] hover:bg-[#ab3154] duration-200 text-white font-bold px-4 xl:px-6 py-1 rounded"
-            >
-              Login
-            </button>
-          )}
         </div>
       </div>
     </div>

@@ -32,19 +32,21 @@ const AuthContextProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, githubProvider);
   };
-  //  sign UP with email password
-  const signUpWithEmailPassword = (email, password) => {
+
+  //  register user with email password
+  const registerUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  //  sign in with email password
-  const signInWithEmailPassword = (email, password) => {
+
+  //  sign in user with email password
+  const signInUser = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // logout
-  const logOut = () => {
+  // sign out user
+  const signOutUser = () => {
     setLoading(true);
     return signOut(auth);
   };
@@ -59,7 +61,7 @@ const AuthContextProvider = ({ children }) => {
   // use observer to check user state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("Inner subscribe 4");
+      console.log("check user state...");
       console.log(user);
       setLoading(false);
       setUser(currentUser);
@@ -73,9 +75,9 @@ const AuthContextProvider = ({ children }) => {
   // context data
   const authInfo = {
     googleSignIn,
-    signUpWithEmailPassword,
-    signInWithEmailPassword,
-    logOut,
+    registerUser,
+    signInUser,
+    signOutUser,
     updateUserProfile,
     githubSignIn,
     loading,
