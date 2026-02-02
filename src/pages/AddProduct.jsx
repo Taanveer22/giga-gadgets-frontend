@@ -6,12 +6,14 @@ const AddProduct = () => {
 
   const handleAddProduct = (e) => {
     e.preventDefault();
+    const email = user?.email;
     const name = e.target.name.value;
+    const brand = e.target.brand.value;
     const price = e.target.price.value;
     const image = e.target.image.value;
     const type = e.target.type.value;
-    const email = user?.email;
-    const info = { name, price, image, type, email };
+    const rating = e.target.rating.value;
+    const info = { email, name, brand, price, image, type, rating };
     // console.log(info);
 
     // send data to server via post method
