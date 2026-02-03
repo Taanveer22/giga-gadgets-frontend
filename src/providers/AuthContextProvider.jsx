@@ -28,7 +28,7 @@ const AuthContextProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
-  
+
   // github sign in
   const githubSignIn = () => {
     setLoading(true);

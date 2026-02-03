@@ -4,16 +4,18 @@ import WhyChooseUs from "../componets/WhyChooseUs";
 
 const Home = () => {
   return (
-    <div className="">
-      <div>
+    <div>
+      <section>
         <Hero />
-      </div>
-      <div className="">
+      </section>
+
+      <section>
         <WhyChooseUs></WhyChooseUs>
-      </div>
-      <div className="">
+      </section>
+      
+      <section>
         <Feedback></Feedback>
-      </div>
+      </section>
     </div>
   );
 };

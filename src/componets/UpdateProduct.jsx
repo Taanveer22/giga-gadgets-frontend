@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
+import baseURL from "../utils/url";
 
 const UpdateProduct = () => {
   const { id } = useParams();
-  // console.log(id);
+  console.log(id);
   const [product, setProduct] = useState({});
 
   useEffect(() => {
     // receive data from server via get method
-    fetch(`http://localhost:5000/product/${id}`)
+    fetch(`${baseURL}/product/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -30,7 +31,7 @@ const UpdateProduct = () => {
     // console.log(info);
 
     // send data to server for update product via put method
-    fetch(`http://localhost:5000/updateProduct/${id}`, {
+    fetch(`${baseURL}/updateProduct/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

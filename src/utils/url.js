@@ -1,4 +1,3 @@
-const baseURL =
-  "https://giga-gadgets-server-dt8gf3zh1-mdmitulhossen.vercel.app";
+const baseURL = "https://giga-gadgets-backend.onrender.com";
 
 export default baseURL;

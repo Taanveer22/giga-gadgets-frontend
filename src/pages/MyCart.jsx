@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import ProductCard from "../componets/ProductCard";
 import toast from "react-hot-toast";
+import baseURL from "../utils/url";
 
 const MyCart = () => {
   const { user } = useAuth() || {};
@@ -10,17 +11,17 @@ const MyCart = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/products/${user?.email}`)
+      fetch(`${baseURL}/products/${user?.email}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           setItems(data);
         });
     }
   }, [user?.email, control]);
 
   const handleDeleteItem = (id) => {
-    fetch(`http://localhost:5000/deleteProduct/${id}`, {
+    fetch(`${baseURL}/deleteProduct/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -28,7 +29,7 @@ const MyCart = () => {
         console.log(data);
         if (data.deletedCount > 0) {
           toast.success("delete item successfully");
-          
+
           // ✅ Instantly update UI without waiting for re-fetch
           // const remainingItems = items.filter((item) => item._id !== id);
           // setItems(remainingItems);

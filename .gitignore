@@ -1,3 +1,8 @@
+# Secure all env variations
+.env
+.env.*
+
+
 # Logs
 logs
 *.log

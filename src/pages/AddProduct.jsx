@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
+import baseURL from "../utils/url";
 
 const AddProduct = () => {
   const { user } = useAuth();
@@ -17,7 +18,7 @@ const AddProduct = () => {
     // console.log(info);
 
     // send data to server via post method
-    fetch("http://localhost:5000/addProduct", {
+    fetch(`${baseURL}/addProduct`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

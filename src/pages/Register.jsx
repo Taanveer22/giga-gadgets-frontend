@@ -24,7 +24,7 @@ const Register = () => {
   };
 
   // Handle register with email password
-  const handleRegisterUser = (e) => {
+  const handleRegisterForm = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
@@ -154,7 +154,7 @@ const Register = () => {
                 </div>
 
                 <form
-                  onSubmit={handleRegisterUser}
+                  onSubmit={handleRegisterForm}
                   className="space-y-3 w-full "
                 >
                   <div>
