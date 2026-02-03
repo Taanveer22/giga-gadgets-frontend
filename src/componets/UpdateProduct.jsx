@@ -1,24 +1,37 @@
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import useAuth from "../hooks/useAuth";
+import { useParams } from "react-router-dom";
 
-const AddProduct = () => {
-  const { user } = useAuth();
+const UpdateProduct = () => {
+  const { id } = useParams();
+  // console.log(id);
+  const [product, setProduct] = useState({});
 
-  const handleAddProductForm = (e) => {
+  useEffect(() => {
+    // receive data from server via get method
+    fetch(`http://localhost:5000/product/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data);
+        // console.log(data);
+      });
+  }, [id]);
+  // console.log(product);
+
+  const handleUpdateProductForm = (e) => {
     e.preventDefault();
-    const email = user?.email;
     const name = e.target.name.value;
     const brand = e.target.brand.value;
     const price = e.target.price.value;
     const image = e.target.image.value;
     const type = e.target.type.value;
     const rating = e.target.rating.value;
-    const info = { email, name, brand, price, image, type, rating };
+    const info = { name, brand, price, image, type, rating };
     // console.log(info);
 
-    // send data to server via post method
-    fetch("http://localhost:5000/addProduct", {
-      method: "POST",
+    // send data to server for update product via put method
+    fetch(`http://localhost:5000/updateProduct/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -27,8 +40,8 @@ const AddProduct = () => {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
-        if (data.insertedId) {
-          toast.success("data added successfully");
+        if (data.modifiedCount > 0) {
+          toast.success("product updated successfully");
         }
       });
   };
@@ -39,19 +52,19 @@ const AddProduct = () => {
         {/* Heading */}
         <div className="mt-5 mb-8">
           <p className="text-center text-3xl font-semibold">
-            <span className="mr-3 text-[#FF497C]">
+            <span className="mr-3 text-[#0f7d4f]">
               <i className="bx bxs-alarm-add"></i>
             </span>
 
             <span>
-              <span className="text-[#FF497C]">Add </span>
+              <span className="text-[#0f7d4f]">Update </span>
               Your Product
             </span>
           </p>
         </div>
 
         {/* form */}
-        <form onSubmit={handleAddProductForm}>
+        <form onSubmit={handleUpdateProductForm}>
           <div className="flex gap-8">
             {/* Left Side */}
             <div className="flex-1">
@@ -59,6 +72,7 @@ const AddProduct = () => {
                 Name
               </label>
               <input
+                defaultValue={product?.name}
                 className="w-full p-2 border rounded-md focus:outline-[#FF497C]"
                 type="text"
                 placeholder="Name"
@@ -70,6 +84,7 @@ const AddProduct = () => {
                 Brand Name
               </label>
               <select
+                defaultValue={product?.brand}
                 name="brand"
                 id="brand"
                 className="w-full p-2 border rounded-md focus:outline-[#FF497C]"
@@ -83,6 +98,7 @@ const AddProduct = () => {
                 Price
               </label>
               <input
+                defaultValue={product?.price}
                 className="w-full p-2 border rounded-md focus:outline-[#FF497C]"
                 type="text"
                 placeholder="Enter Price"
@@ -97,6 +113,7 @@ const AddProduct = () => {
                 Image
               </label>
               <input
+                defaultValue={product?.image}
                 className="w-full p-2 border rounded-md focus:outline-[#FF497C]"
                 type="text"
                 placeholder="Enter Image URL"
@@ -108,6 +125,7 @@ const AddProduct = () => {
                 Type
               </label>
               <input
+                defaultValue={product?.type}
                 className="w-full p-2 border rounded-md focus:outline-[#FF497C]"
                 type="text"
                 placeholder="Enter type"
@@ -119,6 +137,7 @@ const AddProduct = () => {
                 Rating
               </label>
               <input
+                defaultValue={product?.rating}
                 className="w-full p-2 border rounded-md focus:outline-[#FF497C]"
                 maxLength={5}
                 max={5}
@@ -133,9 +152,9 @@ const AddProduct = () => {
 
           {/* Submit Button */}
           <input
-            className="px-4 w-full py-2 mt-4 rounded hover:bg-[#ab3154] bg-[#FF497C] duration-200 text-white cursor-pointer font-semibold"
+            className="px-4 w-full py-2 mt-4 rounded hover:bg-[#085c39] bg-[#0f7d4f] duration-200 text-white cursor-pointer font-semibold"
             type="submit"
-            value="Add Product"
+            value="Update Product"
           />
         </form>
       </div>
@@ -143,4 +162,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

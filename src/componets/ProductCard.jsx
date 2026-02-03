@@ -1,5 +1,7 @@
-const ItemCard = ({ singleItem }) => {
-  console.log(singleItem);
+import { Link } from "react-router-dom";
+
+const ProductCard = ({ singleItem }) => {
+  // console.log(singleItem);
   return (
     <div>
       <div className="card bg-base-300 shadow-sm">
@@ -12,7 +14,12 @@ const ItemCard = ({ singleItem }) => {
             <div className="badge badge-secondary">{singleItem?.price} $</div>
           </h2>
           <div className="card-actions justify-items-start">
-            <div className="btn btn-xs btn-success">Update</div>
+            <Link
+              to={`/updateProduct/${singleItem._id}`}
+              className="btn btn-xs btn-success"
+            >
+              Update
+            </Link>
             <div className="btn btn-xs btn-error">Delete</div>
           </div>
         </div>
@@ -21,4 +28,4 @@ const ItemCard = ({ singleItem }) => {
   );
 };
 
-export default ItemCard;
+export default ProductCard;

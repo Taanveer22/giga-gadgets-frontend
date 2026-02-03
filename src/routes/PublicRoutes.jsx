@@ -5,6 +5,7 @@ import AddProduct from "../pages/AddProduct";
 import MyCart from "../pages/MyCart";
 import SignIn from "../pages/SignIn";
 import Register from "../pages/Register";
+import UpdateProduct from "../componets/UpdateProduct";
 
 const PublicRoutes = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const PublicRoutes = createBrowserRouter([
       {
         path: "/addProduct",
         element: <AddProduct></AddProduct>,
+      },
+      {
+        path: "/updateProduct/:id",
+        element: <UpdateProduct></UpdateProduct>,
       },
       {
         path: "/myCart",
