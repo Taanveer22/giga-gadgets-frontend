@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ singleItem }) => {
+const ProductCard = ({ singleItem, handleDeleteItem }) => {
   // console.log(singleItem);
+
   return (
     <div>
       <div className="card bg-base-300 shadow-sm">
@@ -20,7 +21,12 @@ const ProductCard = ({ singleItem }) => {
             >
               Update
             </Link>
-            <div className="btn btn-xs btn-error">Delete</div>
+            <button
+              onClick={() => handleDeleteItem(singleItem._id)}
+              className="btn btn-xs btn-error"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
