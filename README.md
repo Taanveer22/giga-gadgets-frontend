@@ -1,16 +1,37 @@
-# React + Vite
+# 🚀 Giga Gadgets
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack MERN e-commerce platform for electronics and tech gadgets. Users can browse products, manage their shopping cart, and perform CRUD operations on products through an admin panel—all within a secure, responsive, and modern interface.
 
-Currently, two official plugins are available:
+**🔗 [Live Deployment](https://giga-gadgets-crud.web.app)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Key Features
 
-## React Compiler
+- **🛒 Shopping Cart:** Add products to cart with persistent storage
+- **👤 User Authentication:** Secure sign-in with Google and email/password
+- **🔐 Protected Routes:** Admin-only access for product management
+- **📦 Product Management:** Complete CRUD operations (Create, Read, Update, Delete)
+- **🔄 Real-time Updates:** Dynamic cart and product updates without page reload
+- **📱 Responsive Design:** Mobile-first approach with Tailwind CSS
+- **🎯 Smart Navigation:** Active route highlighting and smooth page transitions
+- **🔧 Admin Dashboard:** Dedicated interface for managing inventory
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React.js, Tailwind CSS, React Router |
+| **State Management** | React Context/Hooks |
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB Atlas |
+| **Authentication** | Firebase Authentication |
+| **Frontend Hosting** | Firebase Hosting |
+| **Backend Hosting** | Render |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Deployment & Hosting
+
+| Platform | Purpose | Link |
+| :--- | :--- | :--- |
+| **Firebase** | Frontend Hosting & Auth | [Live Site](https://giga-gadgets-crud.web.app) |
+| **Render** | Backend API Hosting | [API Server](https://giga-gadgets-backend.onrender.com) |
+
+
